@@ -11,7 +11,8 @@
   --light-purple-color: #db74ff;
   --light-blue-color: #2298ff;
   --light-yellow-color: #ffd500;
-  --green-color: #2cd997;
+  --green-color: #9bded4;
+  --brown-color: #705772;
   --light-color: #fff;
   --dark-color: #000;
   --grey-color: #f2f2f2;
@@ -72,10 +73,10 @@ body {
 .quiz-question .category {
   font-size: 0.9rem;
   font-weight: 500;
-  background-color: var(--light-yellow-color);
-  color: var(--dark-color);
-  padding: 0.2rem 0.4rem;
-  border-radius: 0.2rem;
+  background-color: var(--brown-color);
+  color: var(--light-color);
+  padding: 0.2rem 0.8rem;
+  border-radius: 0.5rem;
   margin-top: 0.5rem;
   display: inline-block;
 }
@@ -83,19 +84,31 @@ body {
 .quiz-options {
   list-style-type: none;
   margin: 1rem 0;
+  counter-reset: my-counter;
 }
 
 .quiz-options li {
   border-radius: 0.7rem;
   font-weight: 500;
   margin: 0.9rem 0;
-  padding: 0.7rem 1.2rem;
+  padding: 0.7rem 1.2rem 0.7rem 0.6rem;
   cursor: pointer;
   border: 1.5px solid #ccc;
   font-size: 0.9rem;
-  background-color: var(--light-color);
+  background-color: #fbfbfb;
   color: #777;
   transition: var(--transition);
+  counter-increment: my-counter;
+}
+
+.quiz-options li::before {
+  content: counter(my-counter);
+  color: var(--dark-color);
+  border: 1.5px solid #ccc;
+  padding: 0 0.4rem;
+  border-radius: 0.3rem;
+  margin-right: 0.5rem;
+  background-color: var(--light-color);
 }
 
 .quiz-options li:hover {
@@ -114,6 +127,12 @@ body {
   border-color: var(--light-blue-color) !important;
 }
 
+li.selected::before {
+  background-color: var(--light-blue-color);
+  color: var(--light-color);
+  border: 0;
+}
+
 .quiz-foot button {
   border: none;
   border-radius: 0.7rem;
@@ -127,7 +146,6 @@ body {
   color: var(--light-color);
   letter-spacing: 1px;
   transition: var(--transition);
-  /* margin-top: -1rem; */
 }
 
 .quiz-foot button:hover {
@@ -176,7 +194,7 @@ body {
 .completed {
   font-size: 1.2rem;
   font-weight: 500;
-  color: var(--green-color);
+  color: var(--brown-color);
 }
 
 
