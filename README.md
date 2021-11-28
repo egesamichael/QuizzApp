@@ -1,8 +1,8 @@
 ![](https://img.shields.io/badge/Microverse-blueviolet)
 
-# Project Name
+# Quizzy
 
-> One paragraph statement about the project.
+> A Quiz app that loads questions from the open trivia db API and uses event listeners to capture the users answers to them.
 
 ![screenshot](./app_screenshot.png)
 
