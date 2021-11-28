@@ -11,8 +11,7 @@ const _result = document.getElementById('result');
 let correctAnswer = "", correctScore = 0, totalQuestion = 15;
 let askedCount = 0;
 
-// event listeners
-function eventListeners() {
+const eventListeners = () => {
   _checkBtn.addEventListener('click', checkAnswer);
   _playAgainBtn.addEventListener('click', restartQuiz);
 }
@@ -24,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
   _correctScore.textContent = correctScore;
 });
 
-async function loadQuestion() {
+const loadQuestion = async () => {
   const APIUrl = 'https://opentdb.com/api.php?amount=1';
   const result = await fetch(`${APIUrl}`);
   const data = await result.json();
@@ -32,15 +31,14 @@ async function loadQuestion() {
   showQuestion(data.results[0]);
 }
 
-// display question and options
-function showQuestion(data) {
+const showQuestion = (data) => {
   _checkBtn.disabled = false;
   correctAnswer = data.correct_answer;
   let incorrectAnswer = data.incorrect_answers;
   let optionsList = incorrectAnswer;
   optionsList.splice(Math.floor(Math.random() * (incorrectAnswer.length + 1)), 0, correctAnswer);
 
-  _question.innerHTML = `${data.question} <br> <span class="category">${data.category}</span>`;
+  _question.innerHTML = `${data.question}`;
   _options.innerHTML = `
     ${optionsList.map((option, index) => `
       <li>${index + 1}. <span> ${option} </span></li>
@@ -50,8 +48,7 @@ function showQuestion(data) {
   selectOption();
 }
 
-// options selection
-function selectOption() {
+const selectOption = () => {
   _options.querySelectorAll('li').forEach((option) => {
     option.addEventListener('click', () => {
       if(_options.querySelector('.selected')) {
@@ -64,7 +61,7 @@ function selectOption() {
   });
 }
 
-function checkAnswer() {
+const checkAnswer = () => {
   _checkBtn.disabled = true;
 
   if(_options.querySelector('.selected')) {
@@ -72,9 +69,9 @@ function checkAnswer() {
     
     if(selectedAnswer.trim() == HTMLDecode(correctAnswer)) {
       correctScore++;
-      _result.innerHTML = `<p><i class="fas fa-check"></i> Correct Answer!</p>`;
+      _result.innerHTML = `<p><i class="fas fa-check success"></i> Correct Answer!</p>`;
     } else {
-      _result.innerHTML = `<p><i class="fas fa-times"></i> Incorrect Answer!</p><p><small><b>Correct Answer: </b>${correctAnswer}</small></p>`;
+      _result.innerHTML = `<p><i class="fas fa-times fail"></i> Incorrect Answer!</p>`;
     }
 
     checkCount();
@@ -89,26 +86,26 @@ function HTMLDecode(textString) {
   return doc.documentElement.textContent;
 }
 
-function checkCount() {
+const checkCount = () => {
   askedCount++;
   setCount();
   if(askedCount == totalQuestion) {
-    _result.innerHTML += `<p>Your score is ${correctScore}.</p>`;
+    _result.innerHTML += `<p class="completed">Your score is ${correctScore}.</p>`;
     _playAgainBtn.style.display = "block";
     _checkBtn.style.display = "none";
   } else {
     setTimeout(() => {
       loadQuestion();
-    }, 300);
+    }, 500);
   }
 }
 
-function setCount() {
+const setCount = () => {
   _totalQuestion.textContent = totalQuestion;
   _correctScore.textContent = correctScore;
 }
 
-function restartQuiz() {
+const restartQuiz = () => {
   correctScore = askedCount = 0;
   _playAgainBtn.style.display = "none";
   _checkBtn.style.display = "block";
