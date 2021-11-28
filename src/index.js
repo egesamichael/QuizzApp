@@ -1,4 +1,3 @@
-// https://opentdb.com/api.php?amount=15
 import './style.css';
 
 const _question = document.getElementById('question');
@@ -63,8 +62,6 @@ function selectOption() {
       option.classList.add('selected');
     });
   });
-
-  console.log(correctAnswer);
 }
 
 function checkAnswer() {
