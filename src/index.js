@@ -13,18 +13,6 @@ let correctScore = 0;
 const totalQuestion = 15;
 let askedCount = 0;
 
-const eventListeners = () => {
-  checkBtn.addEventListener('click', checkAnswer);
-  playAgainBtn.addEventListener('click', restartQuiz);
-};
-
-document.addEventListener('DOMContentLoaded', () => {
-  loadQuestion();
-  eventListeners();
-  totalQn.textContent = totalQuestion;
-  correctScores.textContent = correctScore;
-});
-
 const loadQuestion = async () => {
   const APIUrl = 'https://opentdb.com/api.php?amount=1';
   const result = await fetch(`${APIUrl}`);
@@ -63,6 +51,30 @@ const showQuestion = (data) => {
   selectOption();
 };
 
+const HTMLDecode = (textString) => {
+  const doc = new DOMParser().parseFromString(textString, 'text/html');
+  return doc.documentElement.textContent;
+};
+
+const checkCount = () => {
+  askedCount += 1;
+  setCount();
+  if (askedCount === totalQuestion) {
+    results.innerHTML += `<p class="completed">Your score is ${correctScore}.</p>`;
+    playAgainBtn.style.display = 'block';
+    checkBtn.style.display = 'none';
+  } else {
+    setTimeout(() => {
+      loadQuestion();
+    }, 500);
+  }
+};
+
+const setCount = () => {
+  totalQn.textContent = totalQuestion;
+  correctScores.textContent = correctScore;
+};
+
 const checkAnswer = () => {
   checkBtn.disabled = true;
 
@@ -83,30 +95,6 @@ const checkAnswer = () => {
   }
 };
 
-const HTMLDecode = (textString) => {
-  const doc = new DOMParser().parseFromString(textString, 'text/html');
-  return doc.documentElement.textContent;
-};
-
-const checkCount = () => {
-  askedCount++;
-  setCount();
-  if(askedCount === totalQuestion) {
-    results.innerHTML += `<p class="completed">Your score is ${correctScore}.</p>`;
-    playAgainBtn.style.display = 'block';
-    checkBtn.style.display = 'none';
-  } else {
-    setTimeout(() => {
-      loadQuestion();
-    }, 500);
-  }
-};
-
-const setCount = () => {
-  totalQn.textContent = totalQuestion;
-  correctScores.textContent = correctScore;
-};
-
 const restartQuiz = () => {
   correctScore = askedCount = 0;
   playAgainBtn.style.display = 'none';
@@ -115,3 +103,15 @@ const restartQuiz = () => {
   setCount();
   loadQuestion();
 };
+
+const eventListeners = () => {
+  checkBtn.addEventListener('click', checkAnswer);
+  playAgainBtn.addEventListener('click', restartQuiz);
+};
+
+document.addEventListener('DOMContentLoaded', () => {
+  loadQuestion();
+  eventListeners();
+  totalQn.textContent = totalQuestion;
+  correctScores.textContent = correctScore;
+});
