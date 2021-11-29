@@ -53,7 +53,6 @@ body {
   font-weight: 500;
   font-size: 1rem;
   background-color: #f9f4e8;
-  font-weight: bold;
   padding: 0.75rem 1.5rem;
   border-radius: 0.7rem;
   color: var(--dark-color);
@@ -197,8 +196,7 @@ li.selected::before {
   color: var(--brown-color);
 }
 
-
-@media(max-width: 678px) {
+@media (max-width: 678px) {
   .quiz-title {
     font-size: 1.6rem;
   }
