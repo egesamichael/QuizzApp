@@ -81,7 +81,7 @@ const checkAnswer = () => {
   }
 }
 
-function HTMLDecode(textString) {
+const HTMLDecode = (textString) => {
   let doc = new DOMParser().parseFromString(textString, "text/html");
   return doc.documentElement.textContent;
 }

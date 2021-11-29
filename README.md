@@ -4,62 +4,43 @@
 
 > A Quiz app that loads questions from the open trivia db API and uses event listeners to capture the users answers to them.
 
-![screenshot](./app_screenshot.png)
+![screenshot](./app_shot.png)
 
 Additional description about the project and its features.
 
 ## Built With
 
-- Major languages
-- Frameworks
-- Technologies used
+- JavaScript
+- HTML/CSS
+- Webpack
+- Open Trivia DB API
 
 ## Live Demo
 
 [Live Demo Link](https://livedemo.com)
 
 
-## Getting Started
+## Set up locally
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
+- Open your terminal and run the following command: git clone https://github.com/Cathella/QuizzApp.git
+- Run the command "npm install"
+- Run the command "npm run start"
 
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
-### Setup
-
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+Once you completed this steps you should see the app running at: http://localhost:8081/ in your browser.
 
 ## Authors
 
-👤 **Author1**
+👤 **Nakitto Catherine**
 
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
-
-👤 **Author2**
-
-- GitHub: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- LinkedIn: [LinkedIn](https://linkedin.com/in/linkedinhandle)
+- GitHub: [@githubhandle](https://github.com/Cathella)
+- Twitter: [@twitterhandle](https://twitter.com/cathella9)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/nakitto-catherine-2020/)
 
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome!
 
-Feel free to check the [issues page](../../issues/).
+Feel free to check the [issues page](https://github.com/Cathella/QuizzApp/issues/).
 
 ## Show your support
 
