@@ -13,14 +13,6 @@ let correctScore = 0;
 const totalQuestion = 15;
 let askedCount = 0;
 
-const loadQuestion = async () => {
-  const APIUrl = 'https://opentdb.com/api.php?amount=1';
-  const result = await fetch(`${APIUrl}`);
-  const data = await result.json();
-  results.innerHTML = '';
-  showQuestion(data.results[0]);
-};
-
 const selectOption = () => {
   options.querySelectorAll('li').forEach((option) => {
     option.addEventListener('click', () => {
@@ -51,9 +43,22 @@ const showQuestion = (data) => {
   selectOption();
 };
 
+const loadQuestion = async () => {
+  const APIUrl = 'https://opentdb.com/api.php?amount=1';
+  const result = await fetch(`${APIUrl}`);
+  const data = await result.json();
+  results.innerHTML = '';
+  showQuestion(data.results[0]);
+};
+
 const HTMLDecode = (textString) => {
   const doc = new DOMParser().parseFromString(textString, 'text/html');
   return doc.documentElement.textContent;
+};
+
+const setCount = () => {
+  totalQn.textContent = totalQuestion;
+  correctScores.textContent = correctScore;
 };
 
 const checkCount = () => {
@@ -70,33 +75,29 @@ const checkCount = () => {
   }
 };
 
-const setCount = () => {
-  totalQn.textContent = totalQuestion;
-  correctScores.textContent = correctScore;
-};
-
 const checkAnswer = () => {
   checkBtn.disabled = true;
 
   if (options.querySelector('.selected')) {
     const selectedAnswer = options.querySelector('.selected span').textContent;
 
-    if (selectedAnswer.trim() == HTMLDecode(correctAnswer)) {
+    if (selectedAnswer.trim() === HTMLDecode(correctAnswer)) {
       correctScore += 1;
-      results.innerHTML = `<p><i class='fas fa-check success'></i> Correct Answer!</p>`;
+      results.innerHTML = '<p><i class="fas fa-check success"></i> Correct Answer!</p>';
     } else {
-      results.innerHTML = `<p><i class='fas fa-times fail'></i> Incorrect Answer!</p>`;
+      results.innerHTML = '<p><i class="fas fa-times fail"></i> Incorrect Answer!</p>';
     }
 
     checkCount();
   } else {
-    results.innerHTML = `<p><i class='fas fa-question'></i> Please select an option!</p>`;
+    results.innerHTML = '<p><i class="fas fa-question"></i> Please select an option!</p>';
     checkBtn.disabled = false;
   }
 };
 
 const restartQuiz = () => {
-  correctScore = askedCount = 0;
+  correctScore = 0;
+  askedCount = 0;
   playAgainBtn.style.display = 'none';
   checkBtn.style.display = 'block';
   checkBtn.disabled = false;
