@@ -75,6 +75,21 @@ const checkCount = () => {
   }
 };
 
+const highlightCorrectAnswer = () => {
+  options.querySelectorAll('li').forEach((option) => {
+    const optionText = option.querySelector('span').textContent.trim();
+    if (optionText === HTMLDecode(correctAnswer)) {
+      console.log('Correct Answer Highlighted:', optionText);
+      option.style.backgroundColor = '#d4edda'; // Green background
+      option.style.color = '#155724';          // Dark green text
+      option.style.fontWeight = 'bold';        // Make text bold
+    } else {
+      // option.style.backgroundColor = '#f8d7da'; // Red background
+      // option.style.color = '#721c24';          // Dark red text
+    }
+  });
+};
+
 const checkAnswer = () => {
   checkBtn.disabled = true;
 
@@ -88,7 +103,13 @@ const checkAnswer = () => {
       results.innerHTML = '<p><i class="fas fa-times fail"></i> Incorrect Answer!</p>';
     }
 
-    checkCount();
+    highlightCorrectAnswer();
+
+    setTimeout(() => {
+      results.innerHTML = '';
+      options.innerHTML = '';
+      checkCount();
+    }, 5000); // 5-second delay
   } else {
     results.innerHTML = '<p><i class="fas fa-question"></i> Please select an option!</p>';
     checkBtn.disabled = false;
